@@ -1,3 +1,5 @@
+using weather_monitoring_and_reporting_service.models.Weather;
+
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
 public class SnowBot(decimal temperatureThreshold, bool enabled, string? message)
@@ -6,7 +8,7 @@ public class SnowBot(decimal temperatureThreshold, bool enabled, string? message
     public decimal TemperatureThreshold { get; set; } = temperatureThreshold;
 
 
-    public override bool CheckForConditions(Weather.Weather? weather)
+    public override bool CheckForConditions(IWeather? weather)
     {
         if (weather?.Temperature < TemperatureThreshold)
         {

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using weather_monitoring_and_reporting_service.models.Weather;
 
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
@@ -14,5 +15,5 @@ public abstract class Bots
         Message = message;
     }
 
-    public abstract bool CheckForConditions(Weather.Weather? weather);
+    public abstract bool CheckForConditions(IWeather?  weather);
 }

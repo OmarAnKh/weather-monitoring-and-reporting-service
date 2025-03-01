@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using weather_monitoring_and_reporting_service.models.Weather;
 
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
@@ -13,7 +14,7 @@ public class RainBot : Bots
         HumidityThreshold = humidityThreshold;
     }
 
-    public override bool CheckForConditions(Weather.Weather? weather)
+    public override bool CheckForConditions(IWeather? weather)
     {
         if (this.HumidityThreshold > weather?.Humidity)
         {
