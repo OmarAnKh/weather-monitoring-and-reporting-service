@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Newtonsoft.Json;
 using weather_monitoring_and_reporting_service.models.Bots.Factories;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -7,19 +6,19 @@ namespace weather_monitoring_and_reporting_service.models.Bots;
 
 public class GetConfigs : IGetConfigs
 {
-    private static readonly RainBotFactory RainBotFactory = new();
-    private static readonly SunBotFactory SunBotFactory = new();
-    private static readonly SnowBotFactory SnowBotFactory = new();
+    private readonly static RainBotFactory RainBotFactory = new RainBotFactory();
+    private readonly static SunBotFactory SunBotFactory = new SunBotFactory();
+    private readonly static SnowBotFactory SnowBotFactory = new SnowBotFactory();
 
     public static List<Bots> LoadFromJsonFile(string path)
     {
-        var fileStream = File.ReadAllText(path);
-        var options = new JsonSerializerOptions
+        string fileStream = File.ReadAllText(path);
+        JsonSerializerOptions options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = null
             
         };
-        var config = JsonSerializer.Deserialize<BotsConfig>(fileStream,options);
+        BotsConfig? config = JsonSerializer.Deserialize<BotsConfig>(fileStream,options);
         if (config is null)
         {
             throw new FileNotFoundException($"No config file found at {path}");

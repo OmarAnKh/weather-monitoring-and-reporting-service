@@ -4,6 +4,6 @@ public class JsonParserFactory:IWeatherParserFactory
 {
     public IWeather CreateParser(string data)
     {
-        
+        return new JsonToWeatherAdapter(data);
     }
 }

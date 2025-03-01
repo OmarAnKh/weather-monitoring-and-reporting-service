@@ -1,8 +1,10 @@
-namespace weather_monitoring_and_reporting_service.models.Weather;
-
-public interface IWeather
+namespace weather_monitoring_and_reporting_service.models.Weather
 {
-    public string Location { get; set; }
-    public decimal Temperature { get; set; }
-    public decimal Humidity { get; set; }
+    public class Weather
+    {
+        
+        public string? Location { get; set; }
+        public decimal? Temperature { get; set; }
+        public decimal? Humidity { get; set; }
+    }
 }
