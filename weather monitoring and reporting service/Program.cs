@@ -1,21 +1,43 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using weather_monitoring_and_reporting_service.models;
+using weather_monitoring_and_reporting_service.models.Bots;
 using weather_monitoring_and_reporting_service.models.Weather;
 
-string jsonObject = """
-                     {
-                      "Location": "City Name",
-                      "Temperature": 23.0,
-                      "Humidity": 85.0
-                    }
-                    """;
-IWeatherParserFactory jsonFactory=new JsonParserFactory();
-Client jsonClient=new Client(jsonFactory);
-jsonClient.DisplayWeatherInfo(jsonObject);
 
+GetConfigs bots = new GetConfigs();
+IWeatherParserFactory jsonFactory = new JsonParserFactory();
+IWeatherParserFactory xmlFactory = new XmlParserFactory();
+WeatherBots jsonProgram = new WeatherBots(bots, jsonFactory, "../../../files/BotsConfiguration.json");
+WeatherBots xmlProgram = new WeatherBots(bots, xmlFactory, "../../../files/BotsConfiguration.json");
 
-const string xmlObject = "<WeatherData><Location>City Name</Location><Temperature>23.0</Temperature><Humidity>85.0</Humidity></WeatherData>";
-                  
-IWeatherParserFactory xmlFactory=new XmlParserFactory();
-Client xmlClient=new Client(xmlFactory);
-xmlClient.DisplayWeatherInfo(xmlObject);
+while (true)
+{
+    Console.WriteLine("Enter weather data (JSON or XML) or type 'exit' to quit:");
+    string? input = Console.ReadLine()?.Trim();
+
+    if (string.IsNullOrWhiteSpace(input))
+    {
+        Console.WriteLine("Invalid input. Please enter valid weather data.");
+        continue;
+    }
+
+    if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
+    {
+        Console.WriteLine("Exiting program...");
+        break;
+    }
+
+    if (input.StartsWith("{")) 
+    {
+        jsonProgram.CheckWeatherBots(input);
+    }
+    else if (input.StartsWith("<"))
+    {
+        xmlProgram.CheckWeatherBots(input);
+    }
+    else
+    {
+        Console.WriteLine("Invalid format. Please enter weather data in JSON or XML format.");
+    }
+}

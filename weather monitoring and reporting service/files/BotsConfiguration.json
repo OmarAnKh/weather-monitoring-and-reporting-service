@@ -10,7 +10,7 @@
     "Message": "Wow, it's a scorcher out there!"
   },
   "SnowBot": {
-    "Enabled": false,
+    "Enabled": true,
     "TemperatureThreshold": 0,
     "Message": "Brrr, it's getting chilly!"
   }

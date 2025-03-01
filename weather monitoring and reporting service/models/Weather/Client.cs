@@ -10,10 +10,10 @@ namespace weather_monitoring_and_reporting_service.models.Weather
             _parserFactory = parserFactory;
         }
 
-        public void DisplayWeatherInfo(string data)
+        public IParser GetParser()
         {
-            IWeather weather = _parserFactory.CreateParser(data);
-            Console.WriteLine($"Location: {weather.Location}, Temperature: {weather.Temperature}, Humidity: {weather.Humidity}");
+            
+            return _parserFactory.CreateParser();
         }
     }
 }

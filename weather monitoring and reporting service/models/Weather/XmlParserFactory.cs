@@ -3,9 +3,9 @@ namespace weather_monitoring_and_reporting_service.models.Weather
     public class XmlParserFactory:IWeatherParserFactory
     {
 
-        public IWeather CreateParser(string data)
+        public IParser CreateParser()
         {
-            return new XmlToWeatherAdapter(data);
+            return new XmlToWeatherAdapter();
         }
     }
 }

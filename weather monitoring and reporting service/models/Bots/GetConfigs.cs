@@ -10,7 +10,7 @@ public class GetConfigs : IGetConfigs
     private readonly static SunBotFactory SunBotFactory = new SunBotFactory();
     private readonly static SnowBotFactory SnowBotFactory = new SnowBotFactory();
 
-    public static List<Bots> LoadFromJsonFile(string path)
+    public List<Bot> LoadFromJsonFile(string path)
     {
         string fileStream = File.ReadAllText(path);
         JsonSerializerOptions options = new JsonSerializerOptions
@@ -24,7 +24,7 @@ public class GetConfigs : IGetConfigs
             throw new FileNotFoundException($"No config file found at {path}");
         }
 
-        List<Bots> bots =
+        List<Bot> bots =
         [
             RainBotFactory.CreateBot(config),
             SunBotFactory.CreateBot(config),

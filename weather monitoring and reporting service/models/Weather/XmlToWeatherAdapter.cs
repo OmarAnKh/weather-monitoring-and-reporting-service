@@ -2,20 +2,22 @@ using System.Xml;
 
 namespace weather_monitoring_and_reporting_service.models.Weather
 {
-    public class XmlToWeatherAdapter :IWeather
+    public class XmlToWeatherAdapter:IParser
     {
-
-        public XmlToWeatherAdapter(string xml)
-        {
-
+        public Weather Parse(string? weather)
+        { 
             try
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(xml);
-
-                Location = xmlDoc.SelectSingleNode("//WeatherData/Location")?.InnerText ?? "Unknown";
-                Temperature = decimal.Parse(xmlDoc.SelectSingleNode("//WeatherData/Temperature")?.InnerText ?? "0");
-                Humidity = decimal.Parse(xmlDoc.SelectSingleNode("//WeatherData/Humidity")?.InnerText ?? "0");
+                if (weather != null)
+                    xmlDoc.LoadXml(weather);
+                Weather weatherData = new Weather
+                {
+                    Location = xmlDoc.SelectSingleNode("//WeatherData/Location")?.InnerText ?? "Unknown",
+                    Temperature = decimal.Parse(xmlDoc.SelectSingleNode("//WeatherData/Temperature")?.InnerText ?? "0"),
+                    Humidity = decimal.Parse(xmlDoc.SelectSingleNode("//WeatherData/Humidity")?.InnerText ?? "0")
+                };
+                return weatherData;
             }
             catch (XmlException ex)
             {
@@ -23,11 +25,5 @@ namespace weather_monitoring_and_reporting_service.models.Weather
                 throw;
             }
         }
-
-        public string? Location { get; set; }
-
-        public decimal? Temperature { get; set; }
-
-        public decimal? Humidity { get; set; }
     }
 }
