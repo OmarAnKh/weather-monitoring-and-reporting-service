@@ -13,15 +13,20 @@ namespace weather_monitoring_and_reporting_service.models
         {
             _getConfigs = getConfigs;
             _weatherParserFactory = weatherParserFactory;
-            _bots = _getConfigs.LoadFromJsonFile(botsConfigurationFilePath) ?? new List<Bot>();
+            _bots = _getConfigs.LoadFromJsonFile(botsConfigurationFilePath);
         }
 
         public void CheckWeatherBots(string? data)
         {
             IParser weatherDataParser = new Client(_weatherParserFactory).GetParser();
+            Weather.Weather? weather = weatherDataParser.Parse(data);
+
             _bots.Where(bot => bot.Enabled)
                 .ToList()
-                .ForEach(bot => bot.CheckForConditions(weatherDataParser.Parse(data)));
+                .ForEach(bot =>
+                {
+                    bot.Check(weather);
+                });
         }
     }
 }
