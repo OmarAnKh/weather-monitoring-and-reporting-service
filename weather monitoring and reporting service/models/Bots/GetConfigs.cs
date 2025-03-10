@@ -1,11 +1,11 @@
 using System.Text.Json;
-using weather_monitoring_and_reporting_service.models.Bots.Factories;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
 public class GetConfigs : IGetConfigs
 {
+
     public List<Bot> LoadFromJsonFile(string path)
     {
         string jsonContent = File.ReadAllText(path);
@@ -24,4 +24,5 @@ public class GetConfigs : IGetConfigs
 
         return [config.RainBot, config.SunBot, config.SnowBot];
     }
+        
 }

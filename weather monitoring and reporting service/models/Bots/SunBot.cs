@@ -1,22 +1,14 @@
 
+using System.Text.Json.Serialization;
+
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
-public class SunBot(decimal temperatureThreshold, bool enabled, string? message)
-    : Bot(enabled, message)
+[method: JsonConstructor]
+
+public class SunBot(bool enabled, decimal temperatureThreshold, string? message)
+    : Bot(enabled, message, new AboveTemperatureThresholdCheckCondition(temperatureThreshold))
 {
-    public decimal TemperatureThreshold { get; set; } = temperatureThreshold;
+    [JsonPropertyName("TemperatureThreshold")]
+    public decimal TemperatureThreshold { get; set; }
 
-
-    public override bool CheckForConditions(Weather.Weather? weather)
-    {
-        if (weather?.Temperature > TemperatureThreshold)
-        {
-            this.Enabled = true;
-            Console.WriteLine("SunBot activated!");
-            Console.WriteLine($"SunBot: {this.Message}\n");
-            return true;
-        }
-
-        return false;
-    }
 }

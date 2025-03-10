@@ -1,22 +1,15 @@
 
+
+using System.Text.Json.Serialization;
+
 namespace weather_monitoring_and_reporting_service.models.Bots;
 
-public class SnowBot(decimal temperatureThreshold, bool enabled, string? message)
-    : Bot(enabled, message)
+[method: JsonConstructor]
+
+public class SnowBot(bool enabled, decimal temperatureThreshold, string? message)
+    : Bot(enabled, message, new BelowTemperatureThresholdCheckCondition(temperatureThreshold))
 {
-    public decimal TemperatureThreshold { get; set; } = temperatureThreshold;
+    [JsonPropertyName("TemperatureThreshold")]
+    public decimal TemperatureThreshold { get; set; }
 
-
-    public override bool CheckForConditions(Weather.Weather? weather)
-    {
-        if (weather?.Temperature < TemperatureThreshold)
-        {
-            this.Enabled = true;
-            Console.WriteLine("SnowBot activated!");
-            Console.WriteLine($"SnowBot: {this.Message}\n");
-            return true;
-        }
-
-        return false;
-    }
 }
