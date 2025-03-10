@@ -6,30 +6,22 @@ namespace weather_monitoring_and_reporting_service.models.Bots;
 
 public class GetConfigs : IGetConfigs
 {
-    private readonly static RainBotFactory RainBotFactory = new RainBotFactory();
-    private readonly static SunBotFactory SunBotFactory = new SunBotFactory();
-    private readonly static SnowBotFactory SnowBotFactory = new SnowBotFactory();
-
     public List<Bot> LoadFromJsonFile(string path)
     {
-        string fileStream = File.ReadAllText(path);
+        string jsonContent = File.ReadAllText(path);
+
         JsonSerializerOptions options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = null
-            
         };
-        BotsConfig? config = JsonSerializer.Deserialize<BotsConfig>(fileStream,options);
+
+        BotsConfig? config = JsonSerializer.Deserialize<BotsConfig>(jsonContent, options);
+
         if (config is null)
         {
             throw new FileNotFoundException($"No config file found at {path}");
         }
 
-        List<Bot> bots =
-        [
-            RainBotFactory.CreateBot(config),
-            SunBotFactory.CreateBot(config),
-            SnowBotFactory.CreateBot(config)
-        ];
-        return bots;
+        return [config.RainBot, config.SunBot, config.SnowBot];
     }
 }

@@ -5,15 +5,13 @@ namespace weather_monitoring_and_reporting_service.models
 {
     public class WeatherBots
     {
-        private readonly IGetConfigs _getConfigs;
         private readonly IWeatherParserFactory _weatherParserFactory;
         private readonly List<Bot> _bots;
 
         public WeatherBots(IGetConfigs getConfigs, IWeatherParserFactory weatherParserFactory, string botsConfigurationFilePath)
         {
-            _getConfigs = getConfigs;
             _weatherParserFactory = weatherParserFactory;
-            _bots = _getConfigs.LoadFromJsonFile(botsConfigurationFilePath) ?? new List<Bot>();
+            _bots = getConfigs.LoadFromJsonFile(botsConfigurationFilePath);
         }
 
         public void CheckWeatherBots(string? data)
