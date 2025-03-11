@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using weather_monitoring_and_reporting_service.models.Bots.Conditions;
 
-namespace weather_monitoring_and_reporting_service.models.Bots;
+namespace weather_monitoring_and_reporting_service.models.Bots.Types{
 
 [method: JsonConstructor]
 public class RainBot(bool enabled, decimal humidityThreshold, string? message)
@@ -9,4 +10,5 @@ public class RainBot(bool enabled, decimal humidityThreshold, string? message)
     
     [JsonPropertyName("HumidityThreshold")]
     public decimal HumidityThreshold { get; set; }
+}
 }

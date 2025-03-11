@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using weather_monitoring_and_reporting_service.models.Bots.Conditions;
 
-namespace weather_monitoring_and_reporting_service.models.Bots;
+namespace weather_monitoring_and_reporting_service.models.Bots{
 
 public abstract class Bot(bool enabled, string? message, ICheckConditionBehavior checkCondition)
 {
@@ -21,4 +22,5 @@ public abstract class Bot(bool enabled, string? message, ICheckConditionBehavior
 
         return false;
     }
+}
 }

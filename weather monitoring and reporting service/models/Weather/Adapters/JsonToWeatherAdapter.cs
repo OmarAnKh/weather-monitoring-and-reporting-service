@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
+using weather_monitoring_and_reporting_service.models.Weather.Parsers;
 
-namespace weather_monitoring_and_reporting_service.models.Weather;
+namespace weather_monitoring_and_reporting_service.models.Weather.Adapters{
 
 public class JsonToWeatherAdapter : IParser
 {
@@ -25,4 +26,5 @@ public class JsonToWeatherAdapter : IParser
 
         return data;
     }
+}
 }

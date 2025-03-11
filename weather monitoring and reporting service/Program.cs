@@ -2,7 +2,9 @@
 
 using weather_monitoring_and_reporting_service.models;
 using weather_monitoring_and_reporting_service.models.Bots;
+using weather_monitoring_and_reporting_service.models.Bots.Configs;
 using weather_monitoring_and_reporting_service.models.Weather;
+using weather_monitoring_and_reporting_service.models.Weather.Parsers;
 
 
 GetConfigs bots = new GetConfigs();
@@ -28,7 +30,7 @@ while (true)
         break;
     }
 
-    if (input.StartsWith("{")) 
+    if (input.StartsWith("{"))
     {
         jsonProgram.CheckWeatherBots(input);
     }

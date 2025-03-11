@@ -1,7 +1,7 @@
 using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace weather_monitoring_and_reporting_service.models.Bots;
+namespace weather_monitoring_and_reporting_service.models.Bots.Configs{
 
 public class GetConfigs : IGetConfigs
 {
@@ -25,4 +25,5 @@ public class GetConfigs : IGetConfigs
         return [config.RainBot, config.SunBot, config.SnowBot];
     }
         
+}
 }

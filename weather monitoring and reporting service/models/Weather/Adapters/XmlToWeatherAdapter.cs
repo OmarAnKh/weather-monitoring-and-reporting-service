@@ -1,6 +1,7 @@
 using System.Xml;
+using weather_monitoring_and_reporting_service.models.Weather.Parsers;
 
-namespace weather_monitoring_and_reporting_service.models.Weather
+namespace weather_monitoring_and_reporting_service.models.Weather.Adapters
 {
     public class XmlToWeatherAdapter : IParser
     {
@@ -11,7 +12,7 @@ namespace weather_monitoring_and_reporting_service.models.Weather
                 XmlDocument xmlDoc = new XmlDocument();
                 if (weather != null)
                     xmlDoc.LoadXml(weather);
-                Weather? weatherData = new Weather
+                Weather weatherData = new Weather
                 {
                     Location = xmlDoc.SelectSingleNode("//WeatherData/Location")?.InnerText ?? "Unknown",
                     Temperature = decimal.Parse(xmlDoc.SelectSingleNode("//WeatherData/Temperature")?.InnerText ?? "0"),

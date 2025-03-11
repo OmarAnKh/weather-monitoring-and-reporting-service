@@ -1,8 +1,9 @@
+using weather_monitoring_and_reporting_service.models.Weather.Parsers;
+
 namespace weather_monitoring_and_reporting_service.models.Weather
 {
     public class Client
     {
-        
         private readonly IWeatherParserFactory _parserFactory;
 
         public Client(IWeatherParserFactory parserFactory)
@@ -12,7 +13,6 @@ namespace weather_monitoring_and_reporting_service.models.Weather
 
         public IParser GetParser()
         {
-            
             return _parserFactory.CreateParser();
         }
     }

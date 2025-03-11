@@ -1,4 +1,4 @@
-namespace weather_monitoring_and_reporting_service.models.Bots
+namespace weather_monitoring_and_reporting_service.models.Bots.Conditions
 {
     public class AboveTemperatureThresholdCheckCondition : ICheckConditionBehavior
     {

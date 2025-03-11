@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using weather_monitoring_and_reporting_service.models.Bots.Types;
 
-namespace weather_monitoring_and_reporting_service.models.Bots;
+namespace weather_monitoring_and_reporting_service.models.Bots{
 
 public class BotsConfig
 {
@@ -17,4 +18,5 @@ public class BotsConfig
         SunBot = sunBot ?? throw new ArgumentNullException(nameof(sunBot));
         SnowBot = snowBot ?? throw new ArgumentNullException(nameof(snowBot));
     }
+}
 }
