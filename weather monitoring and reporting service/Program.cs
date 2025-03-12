@@ -1,9 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using weather_monitoring_and_reporting_service.models;
-using weather_monitoring_and_reporting_service.models.Bots;
 using weather_monitoring_and_reporting_service.models.Bots.Configs;
-using weather_monitoring_and_reporting_service.models.Weather;
 using weather_monitoring_and_reporting_service.models.Weather.Parsers;
 
 

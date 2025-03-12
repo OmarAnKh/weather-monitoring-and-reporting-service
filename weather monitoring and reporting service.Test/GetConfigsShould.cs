@@ -12,13 +12,11 @@ namespace weather_monitoring_and_reporting_service.T;
 public class GetConfigsShould
 {
     private readonly Fixture _fixture;
-    private readonly Mock<IGetConfigs> _mockGetConfigs;
     private readonly GetConfigs _getConfigs;
 
     public GetConfigsShould()
     {
         _fixture = new Fixture();
-        _mockGetConfigs = new Mock<IGetConfigs>();
         _getConfigs = new GetConfigs();
         _fixture.Customize<ICheckConditionBehavior>(c =>
             c.FromFactory(() =>

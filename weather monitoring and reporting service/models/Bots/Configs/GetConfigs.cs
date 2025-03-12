@@ -27,12 +27,11 @@ namespace weather_monitoring_and_reporting_service.models.Bots.Configs
                     throw new JsonException("Failed to deserialize the config.");
                 }
 
-                return new List<Bot>
-                {
-                    config.RainBot?.Enabled == true ? config.RainBot : null,
-                    config.SunBot?.Enabled == true ? config.SunBot : null,
-                    config.SnowBot?.Enabled == true ? config.SnowBot : null
-                }.Where(bot => bot != null).ToList();
+                var bots = new List<Bot>();
+                if (config.RainBot.Enabled) bots.Add(config.RainBot);
+                if (config.SunBot.Enabled) bots.Add(config.SunBot);
+                if (config.SnowBot.Enabled) bots.Add(config.SnowBot);
+                return bots;
             }
             catch (JsonException)
             {
