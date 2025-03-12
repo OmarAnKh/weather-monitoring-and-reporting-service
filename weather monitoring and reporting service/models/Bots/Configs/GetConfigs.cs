@@ -1,29 +1,38 @@
 using System.Text.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace weather_monitoring_and_reporting_service.models.Bots.Configs{
-
-public class GetConfigs : IGetConfigs
+namespace weather_monitoring_and_reporting_service.models.Bots.Configs
 {
-
-    public List<Bot> LoadFromJsonFile(string path)
+    public class GetConfigs : IGetConfigs
     {
-        string jsonContent = File.ReadAllText(path);
-
-        JsonSerializerOptions options = new JsonSerializerOptions
+        public List<Bot> LoadFromJsonFile(string path)
         {
-            PropertyNamingPolicy = null
-        };
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"No config file found at {path}");
+            }
 
-        BotsConfig? config = JsonSerializer.Deserialize<BotsConfig>(jsonContent, options);
+            try
+            {
+                string jsonContent = File.ReadAllText(path);
 
-        if (config is null)
-        {
-            throw new FileNotFoundException($"No config file found at {path}");
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = null
+                };
+
+                BotsConfig? config = JsonSerializer.Deserialize<BotsConfig>(jsonContent, options);
+
+                if (config is null)
+                {
+                    throw new JsonException("Failed to deserialize the config.");
+                }
+
+                return new List<Bot> { config.RainBot, config.SunBot, config.SnowBot };
+            }
+            catch (JsonException)
+            {
+                throw new JsonException("Failed to parse the JSON content.");
+            }
         }
-
-        return [config.RainBot, config.SunBot, config.SnowBot];
     }
-        
-}
 }
