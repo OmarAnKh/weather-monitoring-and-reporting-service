@@ -29,9 +29,9 @@ namespace weather_monitoring_and_reporting_service.models.Bots.Configs
 
                 return new List<Bot>
                 {
-                    config.RainBot.Enabled ? config.RainBot : null,
-                    config.SunBot.Enabled  ? config.SunBot : null,
-                    config.SnowBot.Enabled ? config.SnowBot : null
+                    config.RainBot?.Enabled == true ? config.RainBot : null,
+                    config.SunBot?.Enabled == true ? config.SunBot : null,
+                    config.SnowBot?.Enabled == true ? config.SnowBot : null
                 }.Where(bot => bot != null).ToList();
             }
             catch (JsonException)

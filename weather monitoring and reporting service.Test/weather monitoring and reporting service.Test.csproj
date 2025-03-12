@@ -27,4 +27,8 @@
       <ProjectReference Include="..\weather monitoring and reporting service\weather monitoring and reporting service.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestingFiles\" />
+    </ItemGroup>
+
 </Project>
