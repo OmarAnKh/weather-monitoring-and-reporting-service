@@ -7,11 +7,12 @@ namespace weather_monitoring_and_reporting_service.models.Weather.Adapters
     {
         public Weather? Parse(string? weather)
         {
+            if (weather == null)
+                return null;
             try
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                if (weather != null)
-                    xmlDoc.LoadXml(weather);
+                xmlDoc.LoadXml(weather);
                 Weather weatherData = new Weather
                 {
                     Location = xmlDoc.SelectSingleNode("//WeatherData/Location")?.InnerText ?? "Unknown",
