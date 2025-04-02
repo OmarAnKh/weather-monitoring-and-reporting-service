@@ -28,11 +28,11 @@ while (true)
         break;
     }
 
-    if (input.StartsWith("{")) 
+    if (input.StartsWith("{") && input.EndsWith("}") && input.Length > 1) 
     {
         jsonProgram.CheckWeatherBots(input);
     }
-    else if (input.StartsWith("<"))
+    else if (input.StartsWith("<") && input.EndsWith(">") && input.Length > 1)
     {
         xmlProgram.CheckWeatherBots(input);
     }
